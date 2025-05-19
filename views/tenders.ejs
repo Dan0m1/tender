@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f4f4f9;
+      }
+  
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+  
+      input, textarea, button {
+        margin: 10px;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        width: 300px;
+      }
+  
+      button {
+        background-color: #4CAF50;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+      }
+  
+      button:hover {
+        background-color: #45a049;
+      }
+  
+      a {
+        color: #007BFF;
+        text-decoration: none;
+        font-size: 18px;
+      }
+  
+      a:hover {
+        text-decoration: underline;
+      }
+  
+      h2, h1 {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>  
+<body>
+  <% if (user) { %>
+    <p>Welcome, <%= user.username %> | Balance: <%= user.balance %> грн</p>
+    <form action="/logout" method="get">
+      <button>Logout</button>
+    </form>
+    <form action="/add-funds" method="post">
+      <input type="number" name="amount" placeholder="Sum" required>
+      <button type="submit">Submit</button>
+    </form>
+    <a href="/create">Create tender</a>
+  <% } else { %>
+    <a href="/login">Login</a>
+    <a href="/register">Register</a>
+  <% } %>
+
+  <% if (message) { %>
+    <p><%= message %></p>
+  <% } %>
+
+  <h2>Tenders</h2>
+  <ul>
+    <% tenders.forEach(tender => { %>
+      <li>
+        <a href="/tenders/<%= tender.id %>"><%= tender.title %></a> - <%= tender.currentPrice || tender.startingPrice %> грн, Status: <%= tender.isActive ? 'active' : 'closed' %>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>

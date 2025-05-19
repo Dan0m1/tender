@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f4f4f9;
+      }
+  
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+  
+      input, textarea, button {
+        margin: 10px;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        width: 300px;
+      }
+  
+      button {
+        background-color: #4CAF50;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+      }
+  
+      button:hover {
+        background-color: #45a049;
+      }
+  
+      a {
+        color: #007BFF;
+        text-decoration: none;
+        font-size: 18px;
+      }
+  
+      a:hover {
+        text-decoration: underline;
+      }
+  
+      h2, h1 {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  
+<body>
+  <h1><%= tender.title %></h1>
+  <p><strong>Starting price:</strong> <%= tender.startingPrice %> грн</p>
+  <p><strong>Description:</strong> <%= tender.description %></p>
+  <p><strong>Current Price:</strong> <%= tender.currentPrice || tender.startingPrice %> грн</p>
+  <p><strong>Status:</strong> <%= tender.isActive ? 'active' : 'closed' %></p>
+  <% if (tender.winnerId) { %>
+    <p><strong>Winner ID:</strong> <%= tender.winnerId %></p>
+  <% } %>
+  
+  <% if (user && tender && tender.isActive && user.id !== tender.userId) { %>
+    <form action="/offers/<%= tender.id %>/offer" method="POST">
+      <input type="number" name="amount" step="0.5" min="<%= (tender.currentPrice || tender.startingPrice) + 1 %>" required>
+      <button type="submit">Place Offer</button>
+    </form>
+  <% } %>
+
+  <% if (user && user.id === tender.userId) { %>
+    <% if (tender.isActive) { %>
+    <form action="/tenders/<%= tender.id %>/close" method="POST">
+      <button type="submit">Close tender</button>
+    </form>
+  <% } %>
+    <form action="/tenders/<%= tender.id %>/delete" method="POST">
+      <button type="submit">Delete tender</button>
+    </form>
+  <% } %>
+
+  <a href="/">Back to tenders</a>
+</body>
+</html>
