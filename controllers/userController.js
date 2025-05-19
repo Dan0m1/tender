@@ -13,10 +13,8 @@ class UserController {
   async postRegister(req, res) {
     const { username, password } = req.body;
     const existingUser = await userService.getUserByUsername(username);
-    console.log(existingUser);
     if (existingUser) return res.render('register', { error: 'This username is already occupied.' });
 
-    console.log(username, password)
     await userService.createUser(username, password);
     res.redirect('/login');
   }
