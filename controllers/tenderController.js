@@ -61,14 +61,11 @@ class TenderController {
     const tenderId = parseInt(req.params.id);
     const tender = await this.tenderService.getTenderById(tenderId);
 
-    console.log(tender);
-
     if (!tender) return res.status(404).send('Tender not found');
     if (!req.session.user || req.session.user.id !== tender.userId)
       return res.status(403).send('Not authorized to delete this tender');
 
     try {
-      console.log(tenderId, req.session.user.id)
       await this.tenderService.deleteTender(tenderId, req.session.user.id);
       req.session.message = 'Tender deleted successfully';
     } catch (err) {
