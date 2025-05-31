@@ -1,5 +1,3 @@
-const Tender = require("../models/tenderModel");
-
 class TenderRepository {
     constructor({ userRepository, tenderMapper, sql }) {
         this.userRepository = userRepository;
