@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const {offerController} = require('../controllers/offerController');
+const container = require('../container');
 
-router.post('/:tenderId/offer', offerController.placeOffer);
+const offerController = container.resolve('offerController');
+
+router.post('/:tenderId/offer', (req,res) => offerController.placeOffer(req, res));
 
 module.exports = router;

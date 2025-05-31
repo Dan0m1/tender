@@ -1,17 +1,18 @@
-const {userRepository} = require("../repositories/userRepository");
-const {tenderRepository} = require("../repositories/tenderRepository");
-const {offerRepository} = require("../repositories/offerRepository");
-
-
 class OfferService {
+  constructor({ userRepository, tenderRepository, offerRepository }) {
+    this.userRepository = userRepository;
+    this.tenderRepository = tenderRepository;
+    this.offerRepository = offerRepository;
+  }
+
   async placeOffer(userId, tenderId, amount){
     try {
-      const user = await userRepository.findOneById(userId);
+      const user = await this.userRepository.findOneById(userId);
       if (!user || user.balance < amount) {
         throw new Error('Insufficient balance');
       }
 
-      const tender = await tenderRepository.findOneById(userId);
+      const tender = await this.tenderRepository.findOneById(tenderId);
       if (!tender || !tender.isActive) throw new Error('Tender not found or not active');
       if (tender.userId === userId) throw new Error('Cannot offer on your own tender');
 
@@ -21,7 +22,8 @@ class OfferService {
       }
 
       const offerPayload = {userId, tenderId, amount};
-      await offerRepository.create(offerPayload);
+      await this.offerRepository.create(offerPayload);
+      await this.tenderRepository.updateTenderCurrentPrice(tenderId, amount);
     }
     catch (err) {
       console.error(err);
@@ -30,4 +32,4 @@ class OfferService {
   }
 }
 
-module.exports.offerService = new OfferService();
+module.exports = OfferService;

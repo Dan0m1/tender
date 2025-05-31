@@ -77,11 +77,11 @@
 
   <h2>Tenders</h2>
   <ul>
-    <% tenders.forEach(tender => { %>
+    <% tenders.forEach(tender => { if(!tender.isHidden){%>
       <li>
         <a href="/tenders/<%= tender.id %>"><%= tender.title %></a> - <%= tender.currentPrice || tender.startingPrice %> грн, Status: <%= tender.isActive ? 'active' : 'closed' %>
       </li>
-    <% }) %>
+    <% }}) %>
   </ul>
 </body>
 </html>

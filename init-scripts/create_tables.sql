@@ -14,6 +14,7 @@ CREATE TABLE Tenders (
                          currentPrice DECIMAL(18,2),
                          winnerId INT NULL,
                          isActive BOOLEAN DEFAULT TRUE,
+                         isHidden BOOLEAN DEFAULT FALSE,
                          FOREIGN KEY (userId) REFERENCES Users(id),
                          FOREIGN KEY (winnerId) REFERENCES Users(id)
 );

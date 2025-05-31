@@ -1,10 +1,12 @@
-const {userService} = require('./userService');
-const {tenderRepository} = require('../repositories/tenderRepository');
-const {userRepository} = require("../repositories/userRepository");
-
 class TenderService {
+  constructor({ userRepository, tenderRepository, offerRepository }) {
+    this.userRepository = userRepository;
+    this.tenderRepository = tenderRepository;
+    this.offerRepository = offerRepository;
+  }
+
   async getAllTenders() {
-    let tenders = await tenderRepository.getAllTenders();
+    let tenders = await this.tenderRepository.getAllTenders();
     if (!tenders){
       tenders = []
     }
@@ -12,16 +14,16 @@ class TenderService {
   }
 
   async getTenderById(id) {
-    return tenderRepository.findOneById(id);
+    return this.tenderRepository.findOneById(id);
   }
 
   async createTender(tender) {
     const TAX = 25;
     try {
-      const user = await userService.getUserById(tender.userId);
+      const user = await this.userRepository.findOneById(tender.userId);
       if (!user || user.balance < TAX)
         throw new Error('Insufficient funds');
-      await tenderRepository.createTenderAndTakeTax(tender, user.id, user.balance - TAX);
+      await this.tenderRepository.createTenderAndTakeTax(tender, user.id, user.balance - TAX);
     }
     catch (err) {
       console.error(err);
@@ -31,17 +33,17 @@ class TenderService {
 
   async deleteTender(id, userId) {
     try {
-      const tender = await tenderRepository.findOneById(id);
+      const tender = await this.tenderRepository.findOneById(id);
       if (!tender || tender.userId !== userId)
         throw new Error("Something went wrong");
 
       if (!tender.isActive) {
-        const highestOffer = await offerRepository.getHighestOfferByTenderId(tender.id);
+        const highestOffer = await this.offerRepository.getHighestOfferByTenderId(tender.id);
         if (highestOffer) {
-          await userRepository.updateUserFunds(tender.userId, highestOffer.amount);
+          await this.userRepository.updateUserFunds(tender.userId, highestOffer.amount);
         }
       }
-      await tenderRepository.deleteById(tender.id)
+      await this.tenderRepository.updateTenderIsHidden(id, true);
     }
     catch (err) {
       console.error(err);
@@ -51,19 +53,20 @@ class TenderService {
 
   async closeTender(tenderId, userId) {
     try {
-      const tender = await tenderRepository.findOneById(tenderId);
+      const tender = await this.tenderRepository.findOneById(tenderId);
       if (!tender || tender.userId !== userId)
         throw new Error("Something went wrong");
       if (!tender.isActive) {
         throw new Error("Already closed");
       }
 
-      const offer = await offerRepository.getHighestOfferByTenderId(tender.id)
+      const offer = await this.offerRepository.getHighestOfferByTenderId(tender.id)
+      console.log(offer);
       if (offer) {
-        await tenderRepository.updateTenderWinner(tender.id, offer.userId);
-        await userRepository.updateUserFunds(offer.userId, -offer.amount)
+        await this.tenderRepository.updateTenderWinner(tender.id, offer.userId);
+        await this.userRepository.changeUserFundsByDelta(offer.userId, -offer.amount)
       }
-      await tenderRepository.updateTenderIsActive(tender.id, false);
+      await this.tenderRepository.updateTenderIsActive(tender.id, false);
     }
     catch (err) {
       console.error(err);
@@ -72,4 +75,4 @@ class TenderService {
   }
 }
 
-module.exports.tenderService = new TenderService();
+module.exports = TenderService;
