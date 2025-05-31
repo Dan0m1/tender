@@ -68,7 +68,6 @@ class TenderController {
       return res.status(403).send('Not authorized to delete this tender');
 
     try {
-      console.log(tenderId, req.session.user.id)
       await this.tenderService.deleteTender(tenderId, req.session.user.id);
       req.session.message = 'Tender deleted successfully';
     } catch (err) {
