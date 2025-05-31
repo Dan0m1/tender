@@ -1,13 +1,13 @@
-const User = require('../models/userModel');
+const User = require('../../db/models/userModel');
 
 class UserMapper {
     async map(user) {
         if(!user) return null;
         return new User(
-            user.id,
+            parseInt(user.id),
             user.username,
             user.password,
-            user.balance,
+            parseFloat(user.balance),
         )
     }
 }

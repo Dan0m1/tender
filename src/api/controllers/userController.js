@@ -45,7 +45,7 @@ class UserController {
     const userId = req.session.user.id;
     const amount = parseFloat(req.body.amount);
     try {
-      await this.userService.changeFundsByDelta(userId, amount);
+      await this.userService.changeUserFundsByDelta(userId, amount);
       req.session.message = 'Balance updated successfully';
     } catch (err) {
       req.session.message = `Error: ${err.message}`;

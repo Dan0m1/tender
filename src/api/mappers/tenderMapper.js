@@ -1,16 +1,16 @@
-const Tender = require('../models/tenderModel')
+const Tender = require('../../db/models/tenderModel')
 
 class TenderMapper {
     async map(tender) {
         if(!tender) return null;
         return new Tender(
-            tender.id,
+            parseInt(tender.id),
             tender.title,
-            tender.startingprice,
+            parseFloat(tender.startingprice),
             tender.description,
-            tender.userid,
-            tender.currentprice,
-            tender.winnerid,
+            parseInt(tender.userid),
+            parseFloat(tender.currentprice),
+            parseInt(tender.winnerid),
             tender.isactive,
             tender.ishidden,
         )

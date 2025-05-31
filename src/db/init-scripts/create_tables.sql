@@ -24,6 +24,7 @@ CREATE TABLE Offers (
                         userId INT NOT NULL,
                         tenderId INT NOT NULL,
                         amount DECIMAL(18,2) NOT NULL,
+                        isActive BOOLEAN DEFAULT TRUE,
                         createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                         FOREIGN KEY (userId) REFERENCES Users(id),
                         FOREIGN KEY (tenderId) REFERENCES Tenders(id)

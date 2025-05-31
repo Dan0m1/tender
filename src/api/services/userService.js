@@ -1,4 +1,4 @@
-const User = require('../models/userModel');
+const User = require('../../db/models/userModel');
 const bcrypt = require('bcryptjs');
 
 class UserService {
@@ -6,13 +6,16 @@ class UserService {
     this.userRepository = userRepository;
   }
 
+
   async getUserById(id) {
     return this.userRepository.findOneById(id);
   }
 
+
   async getUserByUsername(username) {
     return this.userRepository.findOneByUsername(username);
   }
+
 
   async createUser(username, password) {
     const salt = await bcrypt.genSalt(10);
@@ -21,7 +24,8 @@ class UserService {
     await this.userRepository.createUser(user);
   }
 
-  async changeFundsByDelta(userId, delta) {
+
+  async changeUserFundsByDelta(userId, delta) {
     const user = await this.userRepository.findOneById(userId);
 
     if (!user) {
@@ -35,5 +39,6 @@ class UserService {
     }
   }
 }
+
 
 module.exports = UserService;

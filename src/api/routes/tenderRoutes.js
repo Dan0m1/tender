@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const container = require('../container');
+const container = require('../../container');
 
 const tenderController = container.resolve('tenderController');
 

@@ -2,9 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
-const userRoutes = require('./routes/userRoutes');
-const tenderRoutes = require('./routes/tenderRoutes');
-const offerRoutes = require('./routes/offerRoutes');
+const userRoutes = require('./api/routes/userRoutes');
+const tenderRoutes = require('./api/routes/tenderRoutes');
+const offerRoutes = require('./api/routes/offerRoutes');
 
 const app = express();
 
@@ -13,9 +13,9 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(session({
-  secret: 'tender-secret',
-  resave: false,
-  saveUninitialized: false
+    secret: 'tender-secret',
+    resave: false,
+    saveUninitialized: false
 }));
 
 app.use('/', tenderRoutes);
