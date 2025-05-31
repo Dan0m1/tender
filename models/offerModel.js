@@ -4,7 +4,7 @@ class Offer {
     this.userId = userId;
     this.tenderId = tenderId;
     this.amount = amount;
-    this.timestamp = createdAt;
+    this.createdAt = createdAt;
   }
 }
 

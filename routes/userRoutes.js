@@ -1,12 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const {userController} = require('../controllers/userController');
+const container = require('../container');
 
-router.get('/login', userController.getLogin);
-router.post('/login', userController.postLogin);
-router.get('/register', userController.getRegister);
-router.post('/register', userController.postRegister);
-router.get('/logout', userController.logout);
-router.post('/add-funds', userController.addFunds);
+const userController = container.resolve('userController');
+
+router.get('/login', (req, res) => userController.getLogin(req,res));
+router.post('/login', (req, res) => userController.postLogin(req,res));
+router.get('/register', (req, res) => userController.getRegister(req,res));
+router.post('/register', (req, res) => userController.postRegister(req,res));
+router.get('/logout', (req, res) => userController.logout(req,res));
+router.post('/add-funds', (req, res) => userController.addFunds(req,res));
 
 module.exports = router;

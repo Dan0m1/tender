@@ -1,12 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const {tenderController} = require('../controllers/tenderController');
+const container = require('../container');
 
-router.get('/', tenderController.listTenders);
-router.get('/tenders/:id', tenderController.viewTender);
-router.get('/create', tenderController.showCreateForm);
-router.post('/create', tenderController.createTender);
-router.post('/tenders/:id/delete', tenderController.deleteTender);
-router.post('/tenders/:id/close', tenderController.closeTender);
+const tenderController = container.resolve('tenderController');
+
+router.get('/', (req, res) => tenderController.listTenders(req,res));
+router.get('/tenders/:id', (req, res) => tenderController.viewTender(req,res));
+router.get('/create', (req, res) => tenderController.showCreateForm(req,res));
+router.post('/create', (req, res) => tenderController.createTender(req,res));
+router.post('/tenders/:id/delete', (req, res) => tenderController.deleteTender(req,res));
+router.post('/tenders/:id/close', (req, res) => tenderController.closeTender(req,res));
 
 module.exports = router;

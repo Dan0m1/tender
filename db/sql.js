@@ -8,4 +8,6 @@ const connectionOptions = {
   port: process.env.POSGTRESS_PORT || 5432,
 }
 
-module.exports.sql = postgres(connectionOptions);
+const sql = postgres(connectionOptions);
+
+module.exports = sql;

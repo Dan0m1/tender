@@ -1,7 +1,10 @@
-const {userService} = require('../services/userService');
 const bcrypt = require('bcryptjs');
 
 class UserController {
+  constructor({ userService }) {
+    this.userService = userService;
+  }
+
   getLogin(req, res) {
     res.render('login');
   }
@@ -12,16 +15,16 @@ class UserController {
 
   async postRegister(req, res) {
     const { username, password } = req.body;
-    const existingUser = await userService.getUserByUsername(username);
+    const existingUser = await this.userService.getUserByUsername(username);
     if (existingUser) return res.render('register', { error: 'This username is already occupied.' });
 
-    await userService.createUser(username, password);
+    await this.userService.createUser(username, password);
     res.redirect('/login');
   }
 
   async postLogin(req, res) {
     const { username, password } = req.body;
-    const user = await userService.getUserByUsername(username);
+    const user = await this.userService.getUserByUsername(username);
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.render('login', { error: 'Invalid credentials' });
     }
@@ -42,7 +45,7 @@ class UserController {
     const userId = req.session.user.id;
     const amount = parseFloat(req.body.amount);
     try {
-      await userService.changeFundsByDelta(userId, amount);
+      await this.userService.changeFundsByDelta(userId, amount);
       req.session.message = 'Balance updated successfully';
     } catch (err) {
       req.session.message = `Error: ${err.message}`;
@@ -51,4 +54,4 @@ class UserController {
   }
 }
 
-module.exports.userController = new UserController();
+module.exports = UserController;

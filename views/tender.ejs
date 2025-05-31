@@ -68,7 +68,7 @@
   
   <% if (user && tender && tender.isActive && user.id !== tender.userId) { %>
     <form action="/offers/<%= tender.id %>/offer" method="POST">
-      <input type="number" name="amount" step="0.5" min="<%= (tender.currentPrice || tender.startingPrice) + 1 %>" required>
+      <input type="number" name="amount" step="0.5" min="<%= Math.ceil((tender.currentPrice || tender.startingPrice) * 2 + 2) / 2 %>" required>
       <button type="submit">Place Offer</button>
     </form>
   <% } %>
