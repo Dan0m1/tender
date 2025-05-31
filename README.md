@@ -67,4 +67,4 @@
 
 3. **Access the Application**
 
-   Now the app is accessible at [http://localhost:3000](http://localhost:3000).
+   Now the app should be accessible at [http://localhost:3000](http://localhost:3000).
