@@ -55,7 +55,7 @@
 
 2. **Create a vaild .env file**
 
-   You can either remove .example ending of [.env.example](https://github.com/Dan0m1/tender/blob/main/.env.example) and use it as a sample or build an own new one.
+   You can either remove .example ending of [.env.example](https://github.com/Dan0m1/tender/blob/main/.env.example) and use it as a sample or make an own new one.
    
 
 2. **Build and Start Services**
