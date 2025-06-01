@@ -11,30 +11,43 @@ const OfferController = require('./api/controllers/offerController');
 const TenderMapper = require('./api/mappers/tenderMapper');
 const OfferMapper = require('./api/mappers/offerMapper');
 const UserMapper = require('./api/mappers/userMapper');
+const MockUserRepository = require('./db/mock/repositories/mockUserRepository');
+const MockTenderRepository = require("./db/mock/repositories/mockTenderRepository");
 const sql = require('./db/sql');
+const MockOfferRepository = require("./db/mock/repositories/mockOfferRepository");
+
 
 const container = awilix.createContainer({
     injectionMode: awilix.InjectionMode.PROXY,
     strict: true,
 });
 
+const isMockDB = process.env.MOCK_DB === 'true';
+
+container.register({
+    tenderMapper: awilix.asClass(TenderMapper).singleton(),
+    offerMapper: awilix.asClass(OfferMapper).singleton(),
+    userMapper: awilix.asClass(UserMapper).singleton(),
+})
 
 container.register({
     userService: awilix.asClass(UserService),
     tenderService: awilix.asClass(TenderService),
     offerService: awilix.asClass(OfferService),
 
-    userRepository: awilix.asClass(UserRepository),
-    tenderRepository: awilix.asClass(TenderRepository),
-    offerRepository: awilix.asClass(OfferRepository),
+    userRepository: (!isMockDB)
+        ? awilix.asClass(UserRepository).singleton()
+        : awilix.asClass(MockUserRepository).singleton(),
+    tenderRepository: (!isMockDB)
+        ? awilix.asClass(TenderRepository).singleton()
+        : awilix.asClass(MockTenderRepository).singleton(),
+    offerRepository: (!isMockDB)
+        ? awilix.asClass(OfferRepository).singleton()
+        : awilix.asClass(MockOfferRepository).singleton(),
 
     userController: awilix.asClass(UserController),
     tenderController: awilix.asClass(TenderController),
     offerController: awilix.asClass(OfferController),
-
-    tenderMapper: awilix.asClass(TenderMapper),
-    offerMapper: awilix.asClass(OfferMapper),
-    userMapper: awilix.asClass(UserMapper),
 
     sql: awilix.asValue(sql)
 })

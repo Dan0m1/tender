@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "userid": 3,
+    "tenderid": 1,
+    "amount": 4500.00,
+    "isactive": false,
+    "createdat": "2025-05-10T10:30:00.000Z"
+  },
+  {
+    "id": 2,
+    "userid": 3,
+    "tenderid": 1,
+    "amount": 4200.00,
+    "isactive": true,
+    "createdat": "2025-05-12T14:15:00.000Z"
+  },
+  {
+    "id": 3,
+    "userid": 4,
+    "tenderid": 2,
+    "amount": 2800.00,
+    "isactive": true,
+    "createdat": "2025-05-15T09:45:00.000Z"
+  },
+  {
+    "id": 4,
+    "userid": 5,
+    "tenderid": 3,
+    "amount": 7800.00,
+    "isactive": false,
+    "createdat": "2025-05-18T16:20:00.000Z"
+  },
+  {
+    "id": 5,
+    "userid": 3,
+    "tenderid": 3,
+    "amount": 7500.00,
+    "isactive": true,
+    "createdat": "2025-05-20T11:05:00.000Z"
+  },
+  {
+    "id": 6,
+    "userid": 2,
+    "tenderid": 4,
+    "amount": 14000.00,
+    "isactive": true,
+    "createdat": "2025-05-22T13:30:00.000Z"
+  },
+  {
+    "id": 7,
+    "userid": 4,
+    "tenderid": 5,
+    "amount": 3800.00,
+    "isactive": true,
+    "createdat": "2025-05-25T15:45:00.000Z"
+  }
+]

@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "title": "Розробка веб-сайту компанії",
+    "startingprice": 5000.00,
+    "description": "Розробка корпоративного веб-сайту з використанням сучасних технологій",
+    "userId": 1,
+    "currentprice": 4200.00,
+    "winnerid": 3,
+    "isactive": false,
+    "ishidden": false
+  },
+  {
+    "id": 2,
+    "title": "Послуги з цифрового маркетингу",
+    "startingprice": 3000.00,
+    "description": "SEO оптимізація та налаштування рекламних кампаній",
+    "userid": 2,
+    "currentprice": 2800.00,
+    "winnerid": null,
+    "isactive": true,
+    "ishidden": false
+  },
+  {
+    "id": 3,
+    "title": "Постачання офісного обладнання",
+    "startingprice": 8000.00,
+    "description": "Постачання комп'ютерів, принтерів та іншого офісного обладнання",
+    "userid": 1,
+    "currentprice": 7500.00,
+    "winnerid": null,
+    "isactive": true,
+    "ishidden": false
+  },
+  {
+    "id": 4,
+    "title": "Ремонт офісного приміщення",
+    "startingprice": 15000.00,
+    "description": "Капітальний ремонт офісного приміщення площею 200 кв.м.",
+    "userid": 5,
+    "currentprice": 14000.00,
+    "winnerid": 2,
+    "isactive": false,
+    "ishidden": false
+  },
+  {
+    "id": 5,
+    "title": "Проведення маркетингового дослідження",
+    "startingprice": 4000.00,
+    "description": "Аналіз ринку та потенційних клієнтів у сфері IT-послуг",
+    "userid": 3,
+    "currentprice": 3800.00,
+    "winnerid": null,
+    "isactive": true,
+    "ishidden": true
+  }
+]

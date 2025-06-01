@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "username": "admin",
+    "password": "$2a$12$.f.KNV/NFtShCijglBiG9Om0r7MFHWGdfUCvqyc.W6S0AXPEx.tSG",
+    "balance": 10000.00
+  },
+  {
+    "id": 2,
+    "username": "ivan_petrov",
+    "password": "$2a$12$nFQSQDG/Q9jNRGO5Bd5dZ.m0x0xbrROERyUQXZTtCtSAd9r0M01US",
+    "balance": 5000.00
+  },
+  {
+    "id": 3,
+    "username": "olena_koval",
+    "password": "$2a$12$aHqDs2otr6OPh2yILD7FPuIIU5JGu96lOngRLJYUwRq4I6krUZiHC",
+    "balance": 7500.00
+  },
+  {
+    "id": 4,
+    "username": "taras_shevchenko",
+    "password": "$2a$12$iZekqFykojHwJ.Hr2Gvyu..LvLzro9FFqSWCf3WG0IOobnFG4jtKy",
+    "balance": 3000.00
+  },
+  {
+    "id": 5,
+    "username": "maria_ivanova",
+    "password": "$2a$12$iFChizmtf49dlKLf47kXkOvGMSL13MgLy8KvHr6MCSpvIWUXpxnDu",
+    "balance": 12500.00
+  }
+]
