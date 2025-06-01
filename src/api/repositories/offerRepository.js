@@ -12,7 +12,7 @@ class OfferRepository {
 
     async getAllActiveOffersByTenderId(tenderId) {
         const result = await this.sql`SELECT * FROM Offers WHERE tenderId = ${tenderId} AND isActive = true ORDER BY amount DESC`;
-        return Promise.all(result.map(async (offer) => await this.offerMapper.map(offer)))
+        return Promise.all(result.map(offer => this.offerMapper.map(offer)))
     }
 
     async getHighestActiveOfferByTenderId(tenderId) {

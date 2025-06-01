@@ -7,7 +7,7 @@ class TenderRepository {
 
     async getAllTenders() {
         const result =  await this.sql`SELECT * FROM Tenders`;
-        return Promise.all(result.map(async (tender) => await this.tenderMapper.map(tender)))
+        return Promise.all(result.map(tender => this.tenderMapper.map(tender)))
     }
 
     async findOneById(id){

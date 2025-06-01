@@ -1,7 +1,7 @@
 const User = require('../../db/models/userModel');
 
 class UserMapper {
-    async map(user) {
+    map(user) {
         if(!user) return null;
         return new User(
             parseInt(user.id),
