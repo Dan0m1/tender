@@ -61,13 +61,13 @@
    You can either remove .example ending of [.env.example](https://github.com/Dan0m1/tender/blob/main/.env.example) and use it as a sample or make an own new one.
    
 
-2. **Build and Start Services**
+3. **Build and Start Services**
 
    ```sh
    docker compose up --build
    ```
 
 
-3. **Access the Application**
+4. **Access the Application**
 
    Now the app should be accessible at [http://localhost:3000](http://localhost:3000).
